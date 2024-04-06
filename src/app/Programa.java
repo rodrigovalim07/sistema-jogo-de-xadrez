@@ -18,7 +18,7 @@ public class Programa {
 		PartidaXadrez partidaXadrez = new PartidaXadrez();
 		List<PeçaXadrez> capturadas = new ArrayList<>();
 		
-		while (true) {
+		while (!partidaXadrez.getCheckMate()) {
 			try {
 				UI.limparTela();
 				UI.printPartida(partidaXadrez, capturadas);
@@ -39,6 +39,16 @@ public class Programa {
 				if (peçaCapturada != null) {
 					capturadas.add(peçaCapturada);
 				}
+				
+				if (partidaXadrez.getPromoçao() != null) {
+					System.out.print("Qual promoção deseja para a peça (T/C/B/Q)? ");
+					String tipo = teclado.nextLine().toUpperCase();
+					while (!tipo.equals("B") && !tipo.equals("T") && !tipo.equals("C") && !tipo.equals("Q")) {
+						System.out.print("Valor inválido. Qual promoção deseja para a peça (T/C/B/Q)? ");
+						tipo = teclado.nextLine().toUpperCase();
+					}
+					partidaXadrez.substituirPeçaPromovida(tipo);
+				}
 			}
 			catch (ExceçaoXadrez e) {
 				System.out.print(e.getMessage());
@@ -49,5 +59,7 @@ public class Programa {
 				teclado.nextLine();
 			}
 		}
+		UI.limparTela();
+		UI.printPartida(partidaXadrez, capturadas);
 	}
 }

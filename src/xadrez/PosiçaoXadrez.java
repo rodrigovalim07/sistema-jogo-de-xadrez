@@ -28,7 +28,7 @@ public class PosiçaoXadrez {
 	}
 	
 	protected static PosiçaoXadrez dePosiçao(Posiçao posiçao) {
-		return new PosiçaoXadrez((char) ('a' - posiçao.getColuna()), 8 - posiçao.getLinha());
+		return new PosiçaoXadrez((char) ('a' + posiçao.getColuna()), 8 - posiçao.getLinha());
 	}
 	
 	@Override
